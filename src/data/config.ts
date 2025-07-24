@@ -3,3 +3,5 @@ const config = {
   description: "Cutama AI is a platform for cutting videos",
   url: "https://cutama.ai",
 };
+
+export default config;
