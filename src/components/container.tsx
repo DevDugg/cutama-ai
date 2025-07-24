@@ -1,22 +1,22 @@
-import { CSSProperties } from "react";
+import { cn } from "@/lib/utils";
 
 interface ContainerProps {
   children: React.ReactNode;
-  childContainerStyle?: CSSProperties;
-  parentContainerStyle?: CSSProperties;
+  className?: string;
+  parentClassName?: string;
 }
 
 const Container = ({
   children,
-  childContainerStyle,
-  parentContainerStyle,
+  className,
+  parentClassName,
 }: ContainerProps) => {
   return (
-    <div className="container" style={parentContainerStyle}>
-      {childContainerStyle ? (
-        <div className="child-container" style={childContainerStyle}>
-          {children}
-        </div>
+    <div
+      className={cn("container mx-auto max-w-[1440px] px-4", parentClassName)}
+    >
+      {className ? (
+        <div className={cn("child-container", className)}>{children}</div>
       ) : (
         children
       )}
