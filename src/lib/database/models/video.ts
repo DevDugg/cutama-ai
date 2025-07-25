@@ -1,6 +1,6 @@
 import mongoose, { Schema, model, models } from "mongoose";
-import { IVideo } from "./types/video-types";
-import { VideoStatus, VideoFormat } from "./types/video-enums";
+import { IVideo } from "../types/video-types";
+import { VideoStatus, VideoFormat } from "../types/video-enums";
 
 const videoSchema = new Schema<IVideo>(
   {
