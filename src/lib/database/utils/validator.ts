@@ -13,8 +13,10 @@ export abstract class BaseValidator<T> {
 
   async validate(data: T): Promise<IValidationResult> {
     const errors: ValidationError[] = [];
+
     for (const [field, rules] of Object.entries(this.rules)) {
       const value = (data as any)[field];
+
       for (const rule of rules) {
         const isValid = await rule.validate(value);
         if (!isValid) {
@@ -26,6 +28,7 @@ export abstract class BaseValidator<T> {
         }
       }
     }
+
     return {
       isValid: errors.length === 0,
       errors,

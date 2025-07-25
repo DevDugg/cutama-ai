@@ -8,7 +8,10 @@ export class RequiredRule implements IValidationRule<any> {
   }
 
   async validate(value: any): Promise<boolean> {
-    return this.required ? value !== undefined && value !== null : true;
+    if (!this.required) return true;
+    if (value === undefined || value === null) return false;
+    if (typeof value === "string") return value.trim().length > 0;
+    return true;
   }
 
   getMessage(): string {
@@ -22,9 +25,23 @@ export class RequiredRule implements IValidationRule<any> {
 
 export class UrlFormatRule implements IValidationRule<string> {
   async validate(value: string): Promise<boolean> {
-    const urlRegex: RegExp =
-      /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
-    return urlRegex.test(value);
+    if (!value) return false;
+    try {
+      // Using URL constructor for more reliable URL validation
+      new URL(value);
+      return true;
+    } catch {
+      // If it's not a full URL, try prepending https:// and check if it's valid
+      try {
+        if (value.startsWith("www.") || value.includes(".")) {
+          new URL(`https://${value}`);
+          return true;
+        }
+        return false;
+      } catch {
+        return false;
+      }
+    }
   }
 
   getMessage(): string {
