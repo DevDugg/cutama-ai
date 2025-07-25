@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from "mongoose";
+import { Schema, model, models } from "mongoose";
 import { IVideo } from "../types/video-types";
 import { VideoStatus, VideoFormat } from "../types/video-enums";
 
