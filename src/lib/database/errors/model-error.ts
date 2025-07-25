@@ -5,6 +5,7 @@ export class ModelError extends CustomError {
 
   constructor(message: string) {
     super(message);
+    Object.setPrototypeOf(this, ModelError.prototype);
     this.name = "ModelError";
   }
 
