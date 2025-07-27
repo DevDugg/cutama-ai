@@ -7,6 +7,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useState } from "react";
+import { CldUploadButton } from "next-cloudinary";
 
 const Upload = () => {
   const form = useForm<{ video: FileList }>();
@@ -40,13 +41,14 @@ const Upload = () => {
               />
             )}
           />
-          <Button
+          <CldUploadButton uploadPreset="default" />
+          {/* <Button
             type="submit"
             className="cursor-pointer"
             disabled={isUploading}
           >
             Upload Video
-          </Button>
+          </Button> */}
         </form>
       </Form>
     </Card>
